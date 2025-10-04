@@ -47,12 +47,23 @@
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <span
-                                        class="badge 
-                            {{ $user->status == 'approved' ? 'bg-success' : ($user->status == 'rejected' ? 'bg-danger' : 'bg-warning text-dark') }}">
-                                        {{ ucfirst($user->status) }}
-                                    </span>
+                                    <form action="{{ route('users.update.status', $user->id) }}" method="POST"
+                                        class="d-flex align-items-center">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <select name="status" class="form-select form-select-sm me-2"
+                                            onchange="this.form.submit()">
+                                            <option value="pending" {{ $user->status == 'pending' ? 'selected' : '' }}>
+                                                Pending</option>
+                                            <option value="approved"
+                                                {{ $user->status == 'approved' ? 'selected' : '' }}>Approved</option>
+                                            <option value="rejected"
+                                                {{ $user->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                        </select>
+                                    </form>
                                 </td>
+
                                 <td>
                                     <a href="{{ route('users.edit', $user->id) }}"
                                         class="btn btn-sm btn-outline-primary">

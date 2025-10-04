@@ -79,4 +79,15 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         return redirect('/admin/login');
     }
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', 'স্ট্যাটাস সফলভাবে আপডেট করা হয়েছে!');
+    }
 }

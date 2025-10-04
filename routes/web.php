@@ -36,5 +36,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin-dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/users/{id}/edit', [App\Http\Controllers\AdminController::class, 'edit'])->name('users.edit');
     Route::put('/users/{id}', [App\Http\Controllers\AdminController::class, 'update'])->name('users.update');
+    Route::put('/users/status/{id}', [App\Http\Controllers\AdminController::class, 'updateStatus'])->name('users.update.status');
     Route::post('/admin/logout', [App\Http\Controllers\AdminController::class, 'logout'])->name('admin.logout');
 });
